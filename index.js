@@ -5,6 +5,11 @@ app.use(express.json());
 // This will act as our simple "database"
 let todos = [];
 
+// ✅ ROOT / HEALTH-CHECK ROUTE
+app.get("/", (req, res) => {
+  res.send("✅ To-Do API is running. Use /todos to interact.");
+});
+
 // CREATE - Add a new to-do
 app.post("/todos", (req, res) => {
   const { title } = req.body;
@@ -24,7 +29,7 @@ app.get("/todos", (req, res) => {
   res.json(todos);
 });
 
-// UPDATE - Mark to-do as completed
+// UPDATE - Toggle a to-do’s completed status
 app.put("/todos/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const todo = todos.find((item) => item.id === id);
@@ -35,17 +40,12 @@ app.put("/todos/:id", (req, res) => {
   res.json(todo);
 });
 
-// DELETE - Remove to-do
+// DELETE - Remove a to-do
 app.delete("/todos/:id", (req, res) => {
   const id = parseInt(req.params.id);
   todos = todos.filter((item) => item.id !== id);
   res.status(204).send();
 });
 
-// Pipeline test 
-// another CI pipeline test
-
-// For manual testing, uncomment this line to run locally
-// app.listen(3000, () => console.log("Server running on http://localhost:3000"));
-
+// Export for testing and server.js
 module.exports = app;
