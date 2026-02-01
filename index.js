@@ -7,10 +7,6 @@ app.use(express.static("public"));
 // This will act as our simple "database"
 let todos = [];
 
-// ✅ ROOT / HEALTH-CHECK ROUTE
-app.get("/", (req, res) => {
-  res.send("✅ To-Do API is running. Use /todos to interact.");
-});
 
 // CREATE - Add a new to-do
 app.post("/todos", (req, res) => {
