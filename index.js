@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 app.use(express.json());
+// for the frontend files
+app.use(express.static("public"));
 
 // This will act as our simple "database"
 let todos = [];
