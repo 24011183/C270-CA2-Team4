@@ -1,4 +1,4 @@
-name: CI - ToDo App Tests
+name: CI/CD - ToDo App Pipeline
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,3 +25,19 @@ jobs:
         run: |
           chmod +x ./node_modules/.bin/jest
           npm test
+
+
+  # New job: Docker build stage (runs after test)
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t todo-team4-app:latest .
