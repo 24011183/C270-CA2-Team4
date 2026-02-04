@@ -27,7 +27,7 @@ jobs:
           npm test
 
 
-  # New job: Docker build stage (runs after test)
+  # docker build stage (runs after test)
 
   docker-build:
     runs-on: ubuntu-latest

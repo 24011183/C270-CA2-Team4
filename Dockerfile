@@ -1,8 +1,8 @@
-# --- Build a Node/Express image for To‑Do App ---
-# Use a small Node base image
+
+# using a small Node base image
 FROM node:20-alpine
 
-# Create the working directory inside the container
+# to make the working directory inside the container
 WORKDIR /app
 
 # Copy dependency files first (better caching)
@@ -14,7 +14,7 @@ RUN npm install --omit=dev
 # Copy the rest of app
 COPY . .
 
-# Expose the port (Render/Kubernetes reads this)
+# Expose the port 
 EXPOSE 3000
 
 # Start cmd
